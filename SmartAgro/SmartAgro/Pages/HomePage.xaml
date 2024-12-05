@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SmartAgro.Pages.HomePage"
+             Title="HomePage"
+             xmlns:sf="clr-namespace:Syncfusion.Maui.Core;assembly=Syncfusion.Maui.Core"
+             xmlns:toolkit="clr-namespace:CommunityToolkit.Maui.Behaviors;assembly=CommunityToolkit.Maui"
+             NavigationPage.HasNavigationBar="False">
+
+    <Page.Behaviors>
+        <toolkit:StatusBarBehavior StatusBarColor="{StaticResource PrimaryDark}"/>
+    </Page.Behaviors>
+
+    <ScrollView>
+        <StackLayout Padding="25" VerticalOptions="Fill" >
+            <StackLayout Padding="5" Spacing="20">
+                <StackLayout Orientation="Horizontal" VerticalOptions="Center" Spacing="10">
+                    <Label 
+                    Text="{Binding Greeting}" 
+                    HorizontalOptions="StartAndExpand"
+                    VerticalOptions="Center"
+                    FontSize="20"
+                    FontFamily="{StaticResource semibold}"
+                />
+                    <Border BackgroundColor="#F5F5F5" Padding="15" 
+                        StrokeShape="RoundRectangle 120"
+                        Stroke="Transparent"
+                        Shadow="{StaticResource CustomShadow}">
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped_ProfilePage"/>
+                        </Border.GestureRecognizers>
+
+                        <Label 
+                        Text="{StaticResource IconUser}"
+                        FontSize="24"
+                        FontFamily="{StaticResource iconSolid}"
+/>
+                    </Border>
+                    <Border BackgroundColor="#F5F5F5" Padding="15"
+                        StrokeShape="RoundRectangle 120"
+Stroke="Transparent"
+Shadow="{StaticResource CustomShadow}">
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+                        </Border.GestureRecognizers>
+
+                        <Label 
+                        Text="{StaticResource IconBell}"
+                        FontSize="24"
+                        FontFamily="{StaticResource iconSolid}"
+                />
+                    </Border>
+
+                </StackLayout>
+
+                <Border
+            HorizontalOptions="Fill"
+            Padding="20"
+                Stroke="Transparent"
+            StrokeShape="RoundRectangle 16"
+                
+            BackgroundColor="{StaticResource Primary}"
+                
+            >
+                    <StackLayout Spacing="10">
+                        <HorizontalStackLayout Spacing="15">
+                            <Border
+                        WidthRequest="50"
+                        HeightRequest="50"
+                        StrokeShape="RoundRectangle 16"
+                            Stroke="Transparent"
+                        BackgroundColor="White"
+                    >
+                                <Label 
+                            Text="{StaticResource SolidIconCheck}" 
+                            TextColor="{StaticResource Tertiary}" 
+                            FontSize="32" 
+                            VerticalTextAlignment="Center" HorizontalTextAlignment="Center"
+                        />
+                            </Border>
+
+                            <Label 
+                        Style="{StaticResource Titulo2}" 
+                        VerticalOptions="CenterAndExpand" 
+                        Text="Tudo certo por hoje!"
+                        LineBreakMode="WordWrap"/>
+                        </HorizontalStackLayout>
+
+                        <Label 
+                    Style="{StaticResource Subtitulo}" 
+                    HorizontalOptions="CenterAndExpand" 
+                    Text="Nenhuma das baias apresentou algum nível preocupante." />
+                    </StackLayout>
+                </Border>
+
+                <StackLayout Orientation="Horizontal" Spacing="25">
+                    <Label  
+                Style="{StaticResource Titulo2}" 
+                Text="{Binding Username, StringFormat='{}{0:F1}, seus sensores'}" 
+                LineBreakMode="WordWrap"
+                FontSize="20"
+                VerticalTextAlignment="Center"
+                HorizontalOptions="StartAndExpand"
+            />
+                    <Border 
+                WidthRequest="60"
+                HeightRequest="60"
+                StrokeShape="RoundRectangle 120"
+                Stroke="Transparent"
+                Shadow="{StaticResource CustomShadow}"
+                BackgroundColor="#F5F5F5"
+                    
+            >
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="TapGestureRecognizer_edit_or_create"/>
+                        </Border.GestureRecognizers>
+                        <Label 
+                    Text="{StaticResource SolidIconPlus}"
+                    VerticalTextAlignment="Center" HorizontalTextAlignment="Center"
+                    FontSize="30"
+                    TextColor="{StaticResource Tertiary}"
+                    />
+                    </Border>
+                </StackLayout>
+
+            </StackLayout>
+
+            <CollectionView
+            x:Name="sensorView">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical" />
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout Background="Transparent" Padding="5">
+
+
+                            <Border BackgroundColor="White"
+                                StrokeShape="RoundRectangle 16, 16, 16, 16"
+                                Padding="2.5"
+Stroke="Transparent"
+Shadow="{StaticResource CustomShadow}">
+                                <Border.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped_SensorPage"/>
+                                </Border.GestureRecognizers>
+
+
+                                <StackLayout Padding="15">
+                                    <StackLayout>
+                                        <StackLayout Orientation="Horizontal">
+                                            <StackLayout Orientation="Horizontal" Spacing="27" HorizontalOptions="StartAndExpand">
+                                                <Label 
+                                      
+                                                FontFamily="{StaticResource iconSolid}" 
+                                                FontSize="20" 
+                                                TextColor="#E5BF42"
+                                                VerticalTextAlignment="Center">
+                                                    <Label.Triggers>
+                                                        <DataTrigger TargetType="Label" Binding="{Binding CategoryId}" Value="1">
+                                                            <Setter Property="Text" Value="{StaticResource SolidIconCarrot}"/>
+                                                            <Setter Property="TextColor" Value="#E57342"/>
+                                                        </DataTrigger>
+                                                        <DataTrigger TargetType="Label" Binding="{Binding CategoryId}" Value="2">
+                                                            <Setter Property="Text" Value="{StaticResource SolidIconWheatAwn}"/>
+                                                            <Setter Property="TextColor" Value="#E5BF42"/>
+                                                        </DataTrigger>
+                                                        <DataTrigger TargetType="Label" Binding="{Binding CategoryId}" Value="3">
+                                                            <Setter Property="Text" Value="{StaticResource SolidIconAppleWhole}"/>
+                                                            <Setter Property="TextColor" Value="#EC7474"/>
+                                                        </DataTrigger>
+                                                        <DataTrigger TargetType="Label" Binding="{Binding CategoryId}" Value="4">
+                                                            <Setter Property="Text" Value="{StaticResource SolidIconPlantWilt}"/>
+                                                            <Setter Property="TextColor" Value="#3E8E4A"/>
+                                                        </DataTrigger>
+                                                        <DataTrigger TargetType="Label" Binding="{Binding CategoryId}" Value="5">
+                                                            <Setter Property="Text" Value="{StaticResource SolidIconSeedling}"/>
+                                                            <Setter Property="TextColor" Value="#50270D"/>
+                                                        </DataTrigger>
+                                                        <DataTrigger TargetType="Label" Binding="{Binding CategoryId}" Value="6">
+                                                            <Setter Property="Text" Value="{StaticResource SolidIconSeedling}"/>
+                                                            <Setter Property="TextColor" Value="#3E8E4A"/>
+                                                        </DataTrigger>
+                                                        <DataTrigger TargetType="Label" Binding="{Binding CategoryId}" Value="7">
+                                                            <Setter Property="Text" Value="{StaticResource SolidIconSeedling}"/>
+                                                            <Setter Property="TextColor" Value="#3E8E4A"/>
+                                                        </DataTrigger>
+                                                        <DataTrigger TargetType="Label" Binding="{Binding CategoryId}" Value="8">
+                                                            <Setter Property="Text" Value="{StaticResource SolidIconSeedling}"/>
+                                                            <Setter Property="TextColor" Value="#3E8E4A"/>
+                                                        </DataTrigger>
+                                                        <DataTrigger TargetType="Label" Binding="{Binding CategoryId}" Value="9">
+                                                            <Setter Property="Text" Value="{StaticResource SolidIconSeedling}"/>
+                                                            <Setter Property="TextColor" Value="#3E8E4A"/>
+                                                        </DataTrigger>
+                                                    </Label.Triggers>
+                                                </Label>
+
+                                                <StackLayout>
+                                                    <Label Text="{Binding CategoryId,Converter={StaticResource CategoryConverter}}" TextColor="#8B8B94" FontSize="15" FontFamily="{StaticResource medium}"/>
+                                                    <Label Text="{Binding SensorName}" TextColor="#222225" FontSize="24" FontFamily="{StaticResource medium}"/>
+                                                </StackLayout>
+                                            </StackLayout>
+                                            <StackLayout>
+                                                <Label Text="Atualizada hoje" TextColor="#3E8E4A" FontSize="14"/>
+                                            </StackLayout>
+                                        </StackLayout>
+                                        <Grid HorizontalOptions="FillAndExpand" VerticalOptions="Center" >
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="45"/>
+                                                <RowDefinition Height="50"/>
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="3*" />
+                                                <ColumnDefinition Width="4*"/>
+                                                <ColumnDefinition Width="4*"/>
+                                                <ColumnDefinition Width="4*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Label Text="Ar" FontSize="20" Grid.Row="0" VerticalTextAlignment="Center"/>
+                                            <StackLayout Grid.Row="0" Grid.Column="1" Orientation="Horizontal" VerticalOptions="Center" Spacing="5">
+                                                <Label Text="{StaticResource SolidIconDroplet}" FontFamily="{StaticResource iconSolid}" TextColor="#8BC9EE" FontSize="18" VerticalTextAlignment="Center"/>
+                                                <Label Text="{Binding LatestLog.UmidadeAr, StringFormat='{}{0:F1}%'}" FontSize="18" VerticalTextAlignment="Center"/>
+                                            </StackLayout>
+                                            <StackLayout Grid.Row="0" Grid.Column="2" Orientation="Horizontal" VerticalOptions="Center" Spacing="5">
+                                                <Label Text="{StaticResource SolidIconTemperatureEmpty}" FontFamily="{StaticResource iconSolid}" TextColor="#EC7474" FontSize="18" VerticalTextAlignment="Center"/>
+                                                <Label Text="{Binding LatestLog.TemperaturaAr,  StringFormat='{}{0:F1}ºC'}" FontSize="18" VerticalTextAlignment="Center"/>
+                                            </StackLayout>
+                                            <StackLayout Grid.Row="0" Grid.Column="3" Orientation="Horizontal" VerticalOptions="Center" Spacing="5">
+                                                <Label Text="{StaticResource SolidIconStar}" FontFamily="{StaticResource iconSolid}" TextColor="#74C0EC" FontSize="18" VerticalTextAlignment="Center"/>
+                                                <Label Text="{Binding LatestLog.Luminosidade, Converter={StaticResource LuminosidadeConverter}}" FontFamily="{StaticResource regular}" FontSize="18" VerticalTextAlignment="Center"/>
+                                            </StackLayout>
+                                            <Label Text="Solo" FontSize="20" Grid.Row="1" VerticalTextAlignment="Center"/>
+                                            <StackLayout  Grid.Row="1" Grid.Column="1" Orientation="Horizontal" VerticalOptions="Center" Spacing="5">
+                                                <Label Text="{StaticResource SolidIconDroplet}" FontFamily="{StaticResource iconSolid}" TextColor="#8BC9EE" FontSize="18" VerticalTextAlignment="Center"/>
+                                                <Label Text="{Binding LatestLog.UmidadeSolo, StringFormat='{}{0:F1}%'}" FontSize="18" VerticalTextAlignment="Center"/>
+                                            </StackLayout>
+                                            <StackLayout  Grid.Row="1" Grid.Column="2" Orientation="Horizontal" VerticalOptions="Center" Spacing="5">
+                                                <Label Text="{StaticResource SolidIconTemperatureEmpty}" FontFamily="{StaticResource iconSolid}" TextColor="#749CEC" FontSize="18" VerticalTextAlignment="Center"/>
+                                                <Label Text="{Binding LatestLog.TemperaturaSolo,  StringFormat='{}{0:F1}ºC'}" FontSize="18" VerticalTextAlignment="Center"/>
+                                            </StackLayout>
+                                            <StackLayout  Grid.Row="1" Grid.Column="3" Orientation="Horizontal" VerticalOptions="Center" Spacing="5">
+                                                <Label Text="pH" TextColor="#C4A02B" FontSize="18" VerticalTextAlignment="Center"/>
+                                                <Label Text="{Binding LatestLog.PhSolo}" FontFamily="{StaticResource regular}" TextColor="#222225" FontSize="18" VerticalTextAlignment="Center"/>
+                                            </StackLayout>
+                                        </Grid>
+                                    </StackLayout>
+                                </StackLayout>
+                            </Border>
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

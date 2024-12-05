@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SmartAgro.Pages.RecoverAccountPage"
+             Title="RecoverAccountPage"
+             xmlns:sf="clr-namespace:Syncfusion.Maui.Core;assembly=Syncfusion.Maui.Core"
+             xmlns:toolkit="clr-namespace:CommunityToolkit.Maui.Behaviors;assembly=CommunityToolkit.Maui"
+             NavigationPage.HasNavigationBar="False"
+             >
+
+
+    <Page.Behaviors>
+        <toolkit:StatusBarBehavior StatusBarColor="{StaticResource PrimaryDark}"/>
+    </Page.Behaviors>
+
+    <AbsoluteLayout>
+        <Image Source="authentication_background.png" AbsoluteLayout.LayoutFlags="All" Aspect="AspectFill" AbsoluteLayout.LayoutBounds="0,0,1,0.4"/>
+
+        <Border BackgroundColor="{StaticResource White}" StrokeShape="RoundRectangle 16,16,0,0"  AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,1,1,0.95">
+
+            <VerticalStackLayout Padding="30" Spacing="30">
+
+                <VerticalStackLayout>
+                    <Label Style="{StaticResource Titulo1}" HorizontalOptions="CenterAndExpand" Text="Verifique o seu Email" FontAttributes="Bold"/>
+                    <Label Style="{StaticResource Subtitulo}" HorizontalOptions="CenterAndExpand" Text="Digite o código que foi enviado para o email:" FontAttributes="Bold"/>
+                    <Label x:Name="EmailLabel" Style="{StaticResource Subtitulo}" HorizontalOptions="CenterAndExpand" Text="" FontAttributes="Bold"/>
+                </VerticalStackLayout>
+
+                <Image Source="mail.png" WidthRequest="169" HeightRequest="169"/>
+
+                <HorizontalStackLayout Padding="-5" Spacing="20" >
+                    <sf:SfTextInputLayout WidthRequest="70" OutlineCornerRadius="16" InputViewPadding="25,15" Padding="0,-5,0,0" ContainerType="Outlined" ContainerBackground="#F4F4EC" Stroke="Transparent">
+                        <Entry x:Name="number1" FontSize="32" Keyboard="Numeric" MaxLength="1" TextChanged="number1_TextChanged" />
+                    </sf:SfTextInputLayout>
+
+                    <sf:SfTextInputLayout WidthRequest="70" OutlineCornerRadius="16" InputViewPadding="25,15" Padding="0,-5,0,0" ContainerType="Outlined" ContainerBackground="#F4F4EC" Stroke="Transparent">
+                        <Entry x:Name="number2" FontSize="32" Keyboard="Numeric" MaxLength="1" TextChanged="number2_TextChanged" />
+                    </sf:SfTextInputLayout>
+
+                    <sf:SfTextInputLayout WidthRequest="70" OutlineCornerRadius="16" InputViewPadding="25,15" Padding="0,-5,0,0" ContainerType="Outlined" ContainerBackground="#F4F4EC" Stroke="Transparent">
+                        <Entry x:Name="number3" FontSize="32" Keyboard="Numeric" MaxLength="1" TextChanged="number3_TextChanged" />
+                    </sf:SfTextInputLayout>
+
+                    <sf:SfTextInputLayout WidthRequest="70" OutlineCornerRadius="16" InputViewPadding="25,15" Padding="0,-5,0,0" ContainerType="Outlined" ContainerBackground="#F4F4EC" Stroke="Transparent">
+                        <Entry x:Name="number4" FontSize="32" Keyboard="Numeric" MaxLength="1" TextChanged="number4_TextChanged" />
+                    </sf:SfTextInputLayout>
+                </HorizontalStackLayout>
+
+
+                <Label x:Name="ErrorMessage" Style="{StaticResource Subtitulo}" TextColor="{StaticResource DarkRed}" HorizontalTextAlignment="Center" HorizontalOptions="CenterAndExpand"  IsVisible="False" />
+                <Button x:Name="buttonConfirmation" Text="Verificar" HorizontalOptions="FillAndExpand" Clicked="Button_Clicked" />
+
+            </VerticalStackLayout>
+
+        </Border>
+    </AbsoluteLayout>
+</ContentPage>

@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SmartAgro.Pages.EditOrCreatePage"
+             xmlns:sf="clr-namespace:Syncfusion.Maui.Core;assembly=Syncfusion.Maui.Core"
+             xmlns:editors="clr-namespace:Syncfusion.Maui.Inputs;assembly=Syncfusion.Maui.Inputs"
+             xmlns:picker="clr-namespace:Syncfusion.Maui.Picker;assembly=Syncfusion.Maui.Picker"
+             xmlns:toolkit="clr-namespace:CommunityToolkit.Maui.Behaviors;assembly=CommunityToolkit.Maui"
+             Title="EditOrCreatePage"
+             NavigationPage.HasNavigationBar="False">
+
+    <ScrollView>
+        <StackLayout VerticalOptions="Fill" Padding="30" HorizontalOptions="Fill">
+            <StackLayout Orientation="Horizontal">
+                <Label 
+                Text="{StaticResource SolidIconAngleLeft}" 
+                HorizontalOptions="Start" 
+                FontSize="20"
+                FontFamily="{StaticResource iconSolid}"
+                VerticalTextAlignment="Center"
+                >
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped_1" />
+                    </Label.GestureRecognizers>
+                </Label>
+                <Label 
+                Text="Criando"
+                HorizontalOptions="CenterAndExpand" 
+                FontSize="20"
+                FontFamily="{StaticResource medium}"
+                VerticalTextAlignment="Center"
+        />
+            </StackLayout>
+
+            <Border Padding="5" BackgroundColor="{StaticResource Gray}" HorizontalOptions="Fill" StrokeShape="RoundRectangle 8" Margin="0,50,0,0">
+                <editors:SfComboBox x:Name="categorias" 
+                    ItemsSource="{Binding Categorias}" 
+                    DisplayMemberPath="Nome" 
+                    BackgroundColor="Transparent" 
+                    FontSize="20"
+                    Placeholder="Selecione uma categoria"
+                    Stroke="Transparent"
+                    DropDownBackground="White"/>
+            </Border>
+
+            <Label Text="Nome" Margin="0, 25, 0, 0"/>
+            <sf:SfTextInputLayout OutlineCornerRadius="8" InputViewPadding="20,0" HeightRequest="65" Padding="0,-5,0,0" ContainerType="Outlined" ContainerBackground="#F5f5f5" Stroke="Transparent">
+                <Entry x:Name="inputName" FontSize="16" />
+            </sf:SfTextInputLayout>
+
+            <Label Text="Data da colheita"  Margin="0, 8, 0, 0"/>
+            <Border Padding="10" Stroke="Transparent">
+                <picker:SfDatePicker x:Name="datePicker" SelectedDate="{Binding DataSelecionada}" Format="dd_MM_yyyy">
+                    <picker:SfDatePicker.HeaderView>
+                        <picker:PickerHeaderView Text="Selecione uma data" Height="35" />
+                    </picker:SfDatePicker.HeaderView>
+                    <picker:SfDatePicker.FooterView>
+                        <picker:PickerFooterView Height="35" CancelButtonText="Cancelar"/>
+                    </picker:SfDatePicker.FooterView>
+                </picker:SfDatePicker>
+            </Border>
+
+            <Label Text="Localização" />
+            <StackLayout Orientation="Horizontal" Spacing="15">
+
+                <sf:SfTextInputLayout OutlineCornerRadius="8" InputViewPadding="20,0" HeightRequest="65" Padding="0,-5,0,0" ContainerType="Outlined" ContainerBackground="#F5f5f5" Stroke="Transparent" HorizontalOptions="FillAndExpand">
+                    <Entry x:Name="inputLocation" FontSize="16" />
+                </sf:SfTextInputLayout>
+
+
+                <Border HorizontalOptions="End" VerticalOptions="StartAndExpand" BackgroundColor="#AFE899" HeightRequest="47" WidthRequest="47" StrokeShape="RoundRectangle 8">
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
+                    </Border.GestureRecognizers>
+                    <Label Text="{StaticResource SolidIconLocationCrosshairs}" FontFamily="{StaticResource iconSolid}" FontSize="24" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                </Border>
+            </StackLayout>
+
+            <StackLayout Spacing="15">
+                <Label Text="Níveis ideaias" FontSize="24" FontFamily="{StaticResource medium}"/>
+                <StackLayout Orientation="Vertical" Spacing="15">
+                    <StackLayout Orientation="Horizontal" VerticalOptions="Center">
+                        <Label Text="Umidade do ar" FontSize="20" FontFamily="{StaticResource regular}" HorizontalOptions="StartAndExpand" VerticalTextAlignment="Center"/>
+                        <sf:SfTextInputLayout OutlineCornerRadius="8" InputViewPadding="20,0" HeightRequest="60" Padding="0,-5,0,0" ContainerType="Outlined" ContainerBackground="#F5f5f5" Stroke="Transparent">
+                            <Entry x:Name="inputUmidadeAr" FontSize="16" />
+                        </sf:SfTextInputLayout>
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal" VerticalOptions="Center">
+                        <Label Text="Umidade do solo" FontSize="20" FontFamily="{StaticResource regular}" HorizontalOptions="StartAndExpand" VerticalTextAlignment="Center"/>
+                        <sf:SfTextInputLayout OutlineCornerRadius="8" InputViewPadding="20,0" HeightRequest="60" Padding="0,-5,0,0" ContainerType="Outlined" ContainerBackground="#F5f5f5" Stroke="Transparent">
+                            <Entry x:Name="inputUmidadeSolo" FontSize="16" />
+                        </sf:SfTextInputLayout>
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal" VerticalOptions="Center">
+                        <Label Text="Temperatura do ar" FontSize="20" FontFamily="{StaticResource regular}" HorizontalOptions="FillAndExpand" VerticalTextAlignment="Center"/>
+                        <sf:SfTextInputLayout OutlineCornerRadius="8" InputViewPadding="20,0" HeightRequest="60" Padding="0,-5,0,0" ContainerType="Outlined" ContainerBackground="#F5f5f5" Stroke="Transparent">
+                            <Entry x:Name="inputTemperaturaAr" FontSize="16" />
+                        </sf:SfTextInputLayout>
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal" VerticalOptions="Center">
+                        <Label Text="Temperatura do solo" FontSize="20" FontFamily="{StaticResource regular}" HorizontalOptions="FillAndExpand" VerticalTextAlignment="Center"/>
+                        <sf:SfTextInputLayout OutlineCornerRadius="8" InputViewPadding="20,0" HeightRequest="60" Padding="0,-5,0,0" ContainerType="Outlined" ContainerBackground="#F5f5f5" Stroke="Transparent">
+                            <Entry x:Name="inputTemperaturaSolo" FontSize="16" />
+                        </sf:SfTextInputLayout>
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal" VerticalOptions="Center">
+                        <Label Text="pH do solo" FontSize="20" FontFamily="{StaticResource regular}" HorizontalOptions="FillAndExpand" VerticalTextAlignment="Center"/>
+                        <sf:SfTextInputLayout OutlineCornerRadius="8" InputViewPadding="20,0" HeightRequest="60" Padding="0,-5,0,0" ContainerType="Outlined" ContainerBackground="#F5f5f5" Stroke="Transparent">
+                            <Entry x:Name="inputPh" FontSize="16" />
+                        </sf:SfTextInputLayout>
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal" VerticalOptions="Center">
+                        <Label Text="Luminosidade" FontSize="20" FontFamily="{StaticResource regular}" HorizontalOptions="FillAndExpand" VerticalTextAlignment="Center"/>
+                        <sf:SfTextInputLayout OutlineCornerRadius="8" InputViewPadding="20,0" HeightRequest="60" Padding="0,-5,0,0" ContainerType="Outlined" ContainerBackground="#F5f5f5" Stroke="Transparent">
+                            <Entry x:Name="inputLuminosidade" FontSize="16" />
+                        </sf:SfTextInputLayout>
+                    </StackLayout>
+
+                </StackLayout>
+            </StackLayout>
+
+            <Button Text="Criar" HorizontalOptions="FillAndExpand" Clicked="Button_Clicked" VerticalOptions="EndAndExpand" Margin="0,30,0,0"/>
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

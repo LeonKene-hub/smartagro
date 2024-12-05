@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SmartAgro.Pages.SensorPage"
+             Title="SensorPage"
+             xmlns:sf="clr-namespace:Syncfusion.Maui.Core;assembly=Syncfusion.Maui.Core"
+             xmlns:toolkit="clr-namespace:CommunityToolkit.Maui.Behaviors;assembly=CommunityToolkit.Maui"
+             xmlns:local="using:SmartAgro.Models"
+             xmlns:chart="clr-namespace:Syncfusion.Maui.Charts;assembly=Syncfusion.Maui.Charts"
+             NavigationPage.HasNavigationBar="False">
+
+    <ScrollView Padding="30,10" VerticalOptions="Fill">
+        <VerticalStackLayout
+            Spacing="25">
+
+            <StackLayout 
+            Orientation="Horizontal">
+                <Label
+                Text="{StaticResource SolidIconAngleLeft}"
+                FontSize="36"
+                HorizontalTextAlignment="Center"
+                VerticalTextAlignment="Center"
+                HorizontalOptions="StartAndExpand">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped_back"/>
+                    </Label.GestureRecognizers>
+                </Label>
+
+                <Label 
+                x:Name="nomeBaia"
+                Style="{StaticResource Titulo2}" 
+                VerticalOptions="CenterAndExpand" 
+                Text=""/>
+
+                <Label
+                Text="{StaticResource IconPenToSquare}"
+                FontSize="24"
+                TextColor="black"
+                FontFamily="{StaticResource icon}"
+                HorizontalTextAlignment="Center"
+                VerticalTextAlignment="Center"
+                HorizontalOptions="EndAndExpand"/>
+            </StackLayout>
+
+            <CollectionView
+            ItemsLayout="HorizontalList"
+            x:Name="datesView"
+            >
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Border
+                        StrokeShape="RoundRectangle 16, 16, 16, 16"
+                        Margin="0,0,10,0"
+                        WidthRequest="60"
+                        HeightRequest="80"
+                        Padding="10"
+                        BackgroundColor="{Binding .,Converter={StaticResource SelectedConverter}}"
+                        Stroke="Transparent">
+
+                            <Border.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped_Select"/>
+                            </Border.GestureRecognizers>
+
+                            <StackLayout>
+                                <Label 
+                                Text="{Binding ., Converter={StaticResource DayConverter}}"
+                                FontAttributes="Bold"
+                                Style="{StaticResource Subtitulo}"
+                                TextColor="{Binding ., Converter={StaticResource SelectedTextConverter}}"
+                                HorizontalOptions="CenterAndExpand"/>
+                                <Label 
+                                Text="{Binding ., StringFormat='{0:dd}'}"  
+                                Style="{StaticResource Titulo2}"
+                                FontSize="16"
+                                HorizontalOptions="CenterAndExpand"/>
+                            </StackLayout>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <Border
+            BackgroundColor="White"
+            Padding="20"
+            StrokeShape="RoundRectangle 16, 16, 16, 16"
+            Stroke="Transparent"
+            Shadow="{StaticResource CustomShadow}">
+
+                <VerticalStackLayout>
+                    <Label 
+                    Style="{StaticResource Subtitulo}" 
+                    HorizontalOptions="StartAndExpand" 
+                    Text="Sábado, dia 2 de novembro" 
+                    TextColor="#9797A7"/>
+
+                    <Label 
+                        Style="{StaticResource Titulo2}" 
+                        HorizontalOptions="StartAndExpand" 
+                        Text="Ensolarado"/>
+
+                    <StackLayout Orientation="Horizontal">
+                        <Label
+                            Text="{StaticResource IconSun}"
+                            FontSize="40"
+                            FontFamily="{StaticResource iconSolid}"
+                            TextColor="#F5C242"/>
+
+
+                        <Label 
+                            Style="{StaticResource Titulo1}" 
+                            HorizontalOptions="StartAndExpand" 
+                            VerticalOptions="CenterAndExpand"
+                            Text=" 20°C"/>
+                    </StackLayout>
+                </VerticalStackLayout>
+            </Border>
+
+            <Border
+                BackgroundColor="#F5F5F5"
+                Padding="20"
+                StrokeShape="RoundRectangle 16, 16, 16, 16"
+                Stroke="Transparent">
+
+                <VerticalStackLayout>
+                    <Label 
+                        Style="{StaticResource Titulo2}" 
+                        HorizontalOptions="StartAndExpand" 
+                        Text="Tempo estimado para a colheita"
+                        FontSize="20"/>
+
+                    <Label 
+                        x:Name="dataColheita"
+                        Style="{StaticResource Titulo1}" 
+                        HorizontalOptions="StartAndExpand" 
+                        Text="26 Dias"/>
+                </VerticalStackLayout>
+            </Border>
+
+            <Grid ColumnDefinitions="*" RowSpacing="15">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="300"/>
+                </Grid.RowDefinitions>
+
+                <Label
+                    Text="Temperatura média do ar por dia"
+                    Style="{StaticResource Titulo2}"
+                    FontSize="20"
+                    Grid.Row="0"/>
+
+                <chart:SfCartesianChart
+                    x:Name="chartXml" 
+                    HorizontalOptions="FillAndExpand" 
+                    VerticalOptions="FillAndExpand"
+                    Grid.Row="1">
+
+                    <!--Model usada para captura de dados-->
+                    <chart:SfCartesianChart.BindingContext>
+                        <local:ChartViewModel/>
+                    </chart:SfCartesianChart.BindingContext>
+
+                    <chart:SfCartesianChart.XAxes>
+                        <chart:DateTimeAxis/>
+                    </chart:SfCartesianChart.XAxes>
+
+                    <chart:SfCartesianChart.YAxes>
+                        <chart:NumericalAxis/>
+                    </chart:SfCartesianChart.YAxes>
+
+                    <chart:LineSeries
+                        XBindingPath="Date"
+                        YBindingPath="Value"
+                        ShowMarkers="True"
+                        ShowDataLabels="True"
+                        Fill="{StaticResource PrimaryDark}">
+
+                        <chart:LineSeries.DataLabelSettings>
+                            <chart:CartesianDataLabelSettings LabelPlacement="Outer" UseSeriesPalette="False"/>
+                        </chart:LineSeries.DataLabelSettings>
+
+                        <chart:LineSeries.MarkerSettings>
+                            <chart:ChartMarkerSettings 
+                                Type="Diamond"
+                                Stroke="{StaticResource PrimaryDark}"
+                                Fill="{StaticResource PrimaryDark}"
+                                StrokeWidth="1"
+                                Height="5"
+                                Width="5"/>
+                        </chart:LineSeries.MarkerSettings>
+                    </chart:LineSeries>
+
+                </chart:SfCartesianChart>
+            </Grid>
+
+            <VerticalStackLayout
+                    HorizontalOptions="Fill">
+
+                <StackLayout
+                        Orientation="Horizontal">
+                    <Label
+                            Text="Proprieade"
+                            Style="{StaticResource Titulo2}"
+                            FontSize="20"/>
+                    <Label
+                            Text="Atual / Ideal"
+                            Style="{StaticResource Titulo2}"
+                            FontSize="20"
+                            HorizontalOptions="EndAndExpand"/>
+                </StackLayout>
+
+                <Label
+                        Text="Pressione para analise no gráfico"
+                        Style="{StaticResource Subtitulo}"
+                        TextColor="{StaticResource PrimaryDark}"
+                        FontAttributes="Bold"/>
+            </VerticalStackLayout>
+
+
+
+            <CollectionView x:Name="infoView">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Border
+                        Grid.Row="1"
+                        Margin="0,0,0,10    "
+                        BackgroundColor="White"
+                        HorizontalOptions="FillAndExpand"
+                        Padding="20"
+                        StrokeShape="RoundRectangle 16, 16, 16, 16"
+                        Stroke="Transparent"
+                        Shadow="{StaticResource CustomShadow}">
+
+                            <Border.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped_chart"/>
+                            </Border.GestureRecognizers>
+
+                            <StackLayout Orientation="Horizontal">
+                                <StackLayout Orientation="Horizontal" VerticalOptions="CenterAndExpand">
+                                    <Label Text="{Binding Icon}" FontFamily="{StaticResource iconSolid}" Margin="0,0,10,0" TextColor="{Binding Color}" FontSize="20" VerticalOptions="CenterAndExpand"/>
+                                    <Label Text="{Binding Nome}" FontSize="16" VerticalOptions="StartAndExpand"/>
+                                </StackLayout>
+
+                                <StackLayout Orientation="Horizontal" VerticalOptions="CenterAndExpand" HorizontalOptions="EndAndExpand">
+                                    <Label
+                                    Text="{Binding NivelAtual}"
+                                     Style="{StaticResource Titulo2}"
+                                    FontSize="16"
+                                    VerticalTextAlignment="Center"/>
+                                    <Label
+                                    Text="/"
+                                    Style="{StaticResource Titulo2}"
+                                    FontSize="16"
+                                    VerticalTextAlignment="Center"/>
+                                    <Label
+                                    Text="{Binding NivelIdeal}"
+                                    Style="{StaticResource Titulo2}"
+                                    FontSize="16"
+                                    VerticalTextAlignment="Center"/>
+                                </StackLayout>
+
+                            </StackLayout>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

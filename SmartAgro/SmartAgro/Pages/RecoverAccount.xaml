@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SmartAgro.Pages.RecoverAccount"
+             Title="RecoverAccount"
+             xmlns:sf="clr-namespace:Syncfusion.Maui.Core;assembly=Syncfusion.Maui.Core"
+             xmlns:toolkit="clr-namespace:CommunityToolkit.Maui.Behaviors;assembly=CommunityToolkit.Maui"
+             NavigationPage.HasNavigationBar="False"
+             >
+
+
+    <Page.Behaviors>
+        <toolkit:StatusBarBehavior StatusBarColor="{StaticResource PrimaryDark}"/>
+    </Page.Behaviors>
+
+    <AbsoluteLayout>
+        <Image Source="authentication_background.png" AbsoluteLayout.LayoutFlags="All" Aspect="AspectFill" AbsoluteLayout.LayoutBounds="0,0,1,0.4"/>
+
+        <Border BackgroundColor="White" StrokeShape="RoundRectangle 16,16,0,0"  AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,1,1,0.95">
+
+            <VerticalStackLayout>
+                <Label Style="{StaticResource Titulo}}" HorizontalOptions="CenterAndExpand" Text="Verifique o seu SMS" FontAttributes="Bold"/>
+                <Label Style="{StaticResource Subtitulo}}" HorizontalOptions="CenterAndExpand" Text="Digite o código que foi enviado para o número:" FontAttributes="Bold"/>
+                <Label Style="{StaticResource Subtitulo}}" HorizontalOptions="CenterAndExpand" Text="11 9*** - **77" FontAttributes="Bold"/>
+            </VerticalStackLayout>
+
+            <Image Source="mail.png" />
+
+            <HorizontalStackLayout>
+
+            </HorizontalStackLayout>
+
+        </Border>
+    </AbsoluteLayout>
+</ContentPage>

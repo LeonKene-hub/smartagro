@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SmartAgro.Pages.LoginPage"
+             Title="LoginPage"
+             xmlns:sf="clr-namespace:Syncfusion.Maui.Core;assembly=Syncfusion.Maui.Core"
+             xmlns:toolkit="clr-namespace:CommunityToolkit.Maui.Behaviors;assembly=CommunityToolkit.Maui"
+             NavigationPage.HasNavigationBar="False">
+
+    <Page.Behaviors>
+        <toolkit:StatusBarBehavior StatusBarColor="{StaticResource PrimaryDark}"/>
+    </Page.Behaviors>
+
+    <AbsoluteLayout>
+        <Image Source="authentication_background.png" AbsoluteLayout.LayoutFlags="All" Aspect="AspectFill" AbsoluteLayout.LayoutBounds="0,0,1,0.4"/>
+
+        <Border BackgroundColor="White" StrokeShape="RoundRectangle 16,16,0,0"  AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,1,1,0.75">
+
+            <VerticalStackLayout Padding="30" Spacing="25">
+
+                <VerticalStackLayout>
+                    <Label Style="{StaticResource Titulo1}" HorizontalOptions="CenterAndExpand" Text="Fazer Login" FontAttributes="Bold"/>
+                    <Label Style="{StaticResource Subtitulo}" HorizontalOptions="CenterAndExpand" Text="Bem vindo de volta ao Smart Agro!" />
+                </VerticalStackLayout>
+
+
+                <VerticalStackLayout>
+                    <Label Text="Email" FontSize="16" FontAttributes="Bold" />
+                    <sf:SfTextInputLayout OutlineCornerRadius="16" InputViewPadding="30,0" Padding="0,-5,0,0" ContainerType="Outlined" ContainerBackground="#F4F4EC" Stroke="Transparent">
+                        <Entry x:Name="inputEmail" FontSize="16" Focused="inputPassword_Focused" />
+                        <sf:SfTextInputLayout.TrailingView>
+                            <Label Text="{StaticResource IconEnvelope}" FontSize="18" TextColor="{StaticResource PrimaryDark}" FontFamily="{StaticResource iconSolid}" WidthRequest="40" Padding="0,10,0,0" />
+                        </sf:SfTextInputLayout.TrailingView>
+                    </sf:SfTextInputLayout>
+
+                    <Label Text="Senha" FontSize="16" FontAttributes="Bold" />
+                    <sf:SfTextInputLayout OutlineCornerRadius="16" InputViewPadding="30,0" Padding="0,-5,0,0" ContainerType="Outlined" ContainerBackground="#F4F4EC" Stroke="Transparent">
+                        <Entry x:Name="inputPassword" FontSize="16" IsPassword="True" Focused="inputPassword_Focused"/>
+                        <sf:SfTextInputLayout.TrailingView>
+                            <Label Text="{StaticResource SolidIconEyeSlash}" x:Name="passwordVisibility" FontSize="18" TextColor="{StaticResource PrimaryDark}" FontFamily="{StaticResource iconSolid}" WidthRequest="40" Padding="0,10,0,0">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped_Password"/>
+                                </Label.GestureRecognizers>
+                            </Label>
+                        </sf:SfTextInputLayout.TrailingView>
+                    </sf:SfTextInputLayout>
+                </VerticalStackLayout>
+
+                <Label x:Name="ErrorMessage" Style="{StaticResource Subtitulo}" TextColor="{StaticResource DarkRed}" HorizontalTextAlignment="Center" HorizontalOptions="CenterAndExpand"  IsVisible="False" />
+
+                <Button x:Name="buttonConfirmation" Text="Login" HorizontalOptions="FillAndExpand" Clicked="Button_Clicked"/>
+                <!--<Image Source="loading.png" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,0.4"/>-->
+
+
+                <VerticalStackLayout Padding="15" Spacing="15">
+
+                    <HorizontalStackLayout HorizontalOptions="Center" Spacing="5">
+                        <Label Text="Você ainda não tem uma conta?" />
+                        <Label x:Name="register" Text="Registre-se" TextColor="Green" FontAttributes="Bold" TextDecorations="Underline">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped_Register"/>
+                            </Label.GestureRecognizers>
+                        </Label>
+                    </HorizontalStackLayout>
+
+                    <Label x:Name="recoverPassword" Text="Esqueceu a senha?"  HorizontalOptions="Center" TextColor="Green" FontAttributes="Bold" TextDecorations="Underline">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="TapGestureRegonizer_Tapped_Recover"/>
+                        </Label.GestureRecognizers>
+                    </Label>
+
+                </VerticalStackLayout>
+
+            </VerticalStackLayout>
+
+        </Border>
+
+    </AbsoluteLayout>
+
+</ContentPage>

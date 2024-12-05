@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SmartAgro.Pages.NotificationPage"
+             Title="NotificationPage"
+             xmlns:sf="clr-namespace:Syncfusion.Maui.Core;assembly=Syncfusion.Maui.Core"
+             xmlns:toolkit="clr-namespace:CommunityToolkit.Maui.Behaviors;assembly=CommunityToolkit.Maui"
+             NavigationPage.HasNavigationBar="False">
+
+    <Page.Behaviors>
+        <toolkit:StatusBarBehavior StatusBarColor="{StaticResource PrimaryDark}"/>
+    </Page.Behaviors>
+    <StackLayout Padding="30" Spacing="30">
+        <StackLayout Orientation="Horizontal" VerticalOptions="Center">
+            <Label 
+            Text="Últimas atualizações!" 
+            HorizontalOptions="StartAndExpand"
+            VerticalOptions="Center"
+            FontSize="20"
+            FontFamily="{StaticResource semibold}"
+        />
+
+        </StackLayout>
+        <StackLayout Orientation="Horizontal" VerticalOptions="Center">
+            <Border
+            HorizontalOptions="Fill"
+            Padding="20"
+            StrokeShape="RoundRectangle 16"
+            BackgroundColor="{StaticResource White}"
+            >
+                <CollectionView IsGrouped="True" x:Name="notificationView" ItemsSource="{x:Binding Data.notificationsList}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout Spacing="10">
+
+                                <Label FontAttributes="Bold" Text="{Binding Mensagem}"/>
+                                <Label FontAttributes="Bold" Text="{Binding Propriedade}"/>
+                                <!--<Label FontAttributes="Bold" Text="{Binding LogsSensorId}"/>-->
+                                <!--<Label FontAttributes="Bold" Text="{Binding UsuarioId}"/>-->
+                                <Label FontAttributes="Bold" Text="{Binding TipoNotificacaoId}"/>
+                                <Label Text="{Binding DataCriacao, StringFormat='{}{0:dd/MM/yyyy HH:mm}'}" FontSize="12" TextColor="Gray" />
+                            
+                            </StackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </Border>
+        </StackLayout>
+        <StackLayout>
+            <Label x:Name="ErrorMessage" Style="{StaticResource Subtitulo}" TextColor="{StaticResource DarkRed}" HorizontalTextAlignment="Center" HorizontalOptions="CenterAndExpand"  IsVisible="False" />
+        </StackLayout>
+    </StackLayout>
+</ContentPage>
